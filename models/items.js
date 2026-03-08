@@ -9,6 +9,10 @@ const Item = db.define('item', {
     price:{
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+    productId:{
+        type: Sequelize.INTEGER,
+        allowNull: false
     }
 }, {timestamps: false})
 
