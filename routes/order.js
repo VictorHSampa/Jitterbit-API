@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { insertOrder, getOrderByNumero, getAllOrders } from '../controller/order.js';
+import { insertOrder, getOrderByNumero, getAllOrders, deleteOrder, editOrder } from '../controller/order.js';
 import { insertItem } from '../controller/item.js';
 
 const orderRouter = Router();
@@ -46,6 +46,20 @@ orderRouter.get('/list', async (req, res) => {
     res.status(200).json(
         result
     );
+})
+
+orderRouter.delete('/:numeroPedido', async (req, res) => {
+    await deleteOrder(req.params.numeroPedido);
+    res.status(200).json({
+        message: 'Order deletada com sucesso'
+    });
+})
+
+orderRouter.put('/:numeroPedido', async (req, res) => {
+    const result = await editOrder(req.params.numeroPedido, req.body.valorTotal, req.body.newNum);
+    res.status(200).json(result || {
+        message: 'Order atualizada com sucesso'
+    });
 })
 
 export default orderRouter;

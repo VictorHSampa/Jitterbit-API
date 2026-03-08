@@ -25,10 +25,10 @@ export async function getAllOrders() {
     return order;
 }
 
-export async function editOrder(num, valor, dataCriacao) {
-    const updates = { num, valor, dataCriacao };
+export async function editOrder(num, valor, newNum) {
+    const updates = { numeroPedido: newNum, valor };
 
-    await Tournament.update(updates, { where: {numeroPedido: num}});
+    await Order.update(updates, { where: {numeroPedido: num}});
     return { message: 'Order updated successfully' };
 }
 
